@@ -7,16 +7,19 @@ import ru.mikhalev.vladimir.gotfamilies.data.network.CharacterModelResponse;
 import ru.mikhalev.vladimir.gotfamilies.data.network.HouseModelResponse;
 import ru.mikhalev.vladimir.gotfamilies.data.network.RestService;
 import ru.mikhalev.vladimir.gotfamilies.data.network.ServiceGenerator;
+import ru.mikhalev.vladimir.gotfamilies.data.storage.DaoSession;
 
 public class DataManager {
     private static DataManager ourInstance;
     private Context mContext;
     private RestService mRestService;
-
+    private DaoSession mDaoSession;
 
     private DataManager() {
         mContext = GotfamilyApplication.getAppContext();
         mRestService = ServiceGenerator.createService(RestService.class);
+        mDaoSession = GotfamilyApplication.getDaoSession();
+
     }
 
     public static DataManager getInstance() {

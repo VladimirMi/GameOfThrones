@@ -1,6 +1,8 @@
 package ru.mikhalev.vladimir.gotfamilies.data.network;
 
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -28,6 +30,7 @@ public class ServiceGenerator {
         sHttpClient.connectTimeout(AppConfig.MAX_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
         sHttpClient.readTimeout(AppConfig.MAX_READ_TIMEOUT, TimeUnit.MILLISECONDS);
         sHttpClient.cache(new Cache(GotfamilyApplication.getAppContext().getCacheDir(), Integer.MAX_VALUE));
+        sHttpClient.addNetworkInterceptor(new StethoInterceptor());
 
         Retrofit retrofit = sBuilder
                 .client(sHttpClient.build())

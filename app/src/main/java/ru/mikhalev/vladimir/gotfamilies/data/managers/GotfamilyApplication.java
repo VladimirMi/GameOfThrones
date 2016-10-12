@@ -2,27 +2,37 @@ package ru.mikhalev.vladimir.gotfamilies.data.managers;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import com.facebook.stetho.Stetho;
+
+import org.greenrobot.greendao.database.Database;
+
+import ru.mikhalev.vladimir.gotfamilies.data.storage.DaoMaster;
+import ru.mikhalev.vladimir.gotfamilies.data.storage.DaoSession;
 
 public class GotfamilyApplication extends Application {
 
-    private static SharedPreferences sSharedPreferences;
     private static Context sContext;
+    private static DaoSession sDaoSession;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sContext = getApplicationContext();
-    }
 
-    public static SharedPreferences getSharedPreferences() {
-        return sSharedPreferences;
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "gothouses-db");
+        Database db = helper.getWritableDb();
+        sDaoSession = new DaoMaster(db).newSession();
+
+        Stetho.initializeWithDefaults(this);
     }
 
     public static Context getAppContext() {
         return sContext;
+    }
+
+    public static DaoSession getDaoSession() {
+        return sDaoSession;
     }
 }
