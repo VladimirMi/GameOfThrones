@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ru.mikhalev.vladimir.gotfamilies.MainActivity">
+    tools:context="ru.mikhalev.vladimir.gotfamilies.ui.activities.SplashActivity">
 
     <TextView
         android:layout_width="wrap_content"
