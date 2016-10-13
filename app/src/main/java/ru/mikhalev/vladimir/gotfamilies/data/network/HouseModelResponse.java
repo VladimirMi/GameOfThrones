@@ -10,52 +10,66 @@ import java.util.List;
 public class HouseModelResponse {
     @SerializedName("url")
     @Expose
-    public String url;
+    private String url;
     @SerializedName("name")
     @Expose
-    public String name;
+    private String name;
     @SerializedName("region")
     @Expose
-    public String region;
+    private String region;
     @SerializedName("coatOfArms")
     @Expose
-    public String coatOfArms;
+    private String coatOfArms;
     @SerializedName("words")
     @Expose
-    public String words;
+    private String words;
     @SerializedName("titles")
     @Expose
-    public List<String> titles = new ArrayList<String>();
+    private List<String> titles = new ArrayList<String>();
     @SerializedName("seats")
     @Expose
-    public List<String> seats = new ArrayList<String>();
+    private List<String> seats = new ArrayList<String>();
     @SerializedName("currentLord")
     @Expose
-    public String currentLord;
+    private String currentLord;
     @SerializedName("heir")
     @Expose
-    public String heir;
+    private String heir;
     @SerializedName("overlord")
     @Expose
-    public String overlord;
+    private String overlord;
     @SerializedName("founded")
     @Expose
-    public String founded;
+    private String founded;
     @SerializedName("founder")
     @Expose
-    public String founder;
+    private String founder;
     @SerializedName("diedOut")
     @Expose
-    public String diedOut;
+    private String diedOut;
     @SerializedName("ancestralWeapons")
     @Expose
-    public List<String> ancestralWeapons = new ArrayList<String>();
+    private List<String> ancestralWeapons = new ArrayList<String>();
     @SerializedName("cadetBranches")
     @Expose
-    public List<String> cadetBranches = new ArrayList<String>();
+    private List<String> cadetBranches = new ArrayList<String>();
     @SerializedName("swornMembers")
     @Expose
-    public List<String> swornMembers = new ArrayList<String>();
+    private List<String> swornMembers = new ArrayList<String>();
 
+    public String getWords() {
+        return words;
+    }
 
+    public List<String> getSwornMembers() {
+        return swornMembers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

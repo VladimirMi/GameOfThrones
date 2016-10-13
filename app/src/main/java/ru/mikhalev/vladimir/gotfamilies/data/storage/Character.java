@@ -1,22 +1,24 @@
 package ru.mikhalev.vladimir.gotfamilies.data.storage;
 
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Unique;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Unique;
+
+import ru.mikhalev.vladimir.gotfamilies.data.network.CharacterModelResponse;
+import ru.mikhalev.vladimir.gotfamilies.utils.Helpers;
 
 @Entity(active = true, nameInDb = "CHARACTERS")
 public class Character {
 
-    @Id
-    private Long id;
-
-    @NotNull
     @Unique
-    private String houseId;
+    private int id;
+
+    private int houseId;
+
+    @Unique
+    private String name;
 
     private String born;
 
@@ -40,12 +42,25 @@ public class Character {
     @Generated(hash = 898307126)
     private transient CharacterDao myDao;
 
-    @Generated(hash = 1795029498)
-    public Character(Long id, @NotNull String houseId, String born, String died,
-            String titles, String aliases, int motherId, int fatherId,
-            String seasons) {
+    public Character(CharacterModelResponse characterModelResponse, String houseUrl) {
+        this.id = Helpers.getIdFromURL(characterModelResponse.getUrl());
+        this.houseId = Helpers.getIdFromURL(houseUrl);
+        this.name = characterModelResponse.getName();
+        this.born = characterModelResponse.getBorn();
+        this.died = characterModelResponse.getDied();
+        this.titles = Helpers.convertToDb(characterModelResponse.getTitles());
+        this.aliases = Helpers.convertToDb(characterModelResponse.getAliases());
+        this.motherId = Helpers.getIdFromURL(characterModelResponse.getMother());
+        this.fatherId = Helpers.getIdFromURL(characterModelResponse.getFather());
+        this.seasons = Helpers.convertToDb(characterModelResponse.getTvSeries());
+    }
+
+    @Generated(hash = 808332274)
+    public Character(int id, int houseId, String name, String born, String died,
+            String titles, String aliases, int motherId, int fatherId, String seasons) {
         this.id = id;
         this.houseId = houseId;
+        this.name = name;
         this.born = born;
         this.died = died;
         this.titles = titles;
@@ -59,20 +74,20 @@ public class Character {
     public Character() {
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getHouseId() {
-        return this.houseId;
+    public String getName() {
+        return this.name.isEmpty() ? "" : this.name;
     }
 
-    public void setHouseId(String houseId) {
-        this.houseId = houseId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBorn() {
@@ -165,6 +180,14 @@ public class Character {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public int getHouseId() {
+        return this.houseId;
+    }
+
+    public void setHouseId(int houseId) {
+        this.houseId = houseId;
     }
 
     /** called by internal mechanisms, do not call yourself. */

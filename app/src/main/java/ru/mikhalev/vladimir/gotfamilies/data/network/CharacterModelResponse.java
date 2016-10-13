@@ -9,53 +9,88 @@ import java.util.List;
 
 public class CharacterModelResponse {
 
-    @SerializedName("url")
-    @Expose
-    public String url;
-    @SerializedName("name")
-    @Expose
-    public String name;
-    @SerializedName("gender")
-    @Expose
-    public String gender;
-    @SerializedName("culture")
-    @Expose
-    public String culture;
-    @SerializedName("born")
-    @Expose
-    public String born;
-    @SerializedName("died")
-    @Expose
-    public String died;
-    @SerializedName("titles")
-    @Expose
-    public List<Object> titles = new ArrayList<Object>();
-    @SerializedName("aliases")
-    @Expose
-    public List<String> aliases = new ArrayList<String>();
-    @SerializedName("father")
-    @Expose
-    public String father;
-    @SerializedName("mother")
-    @Expose
-    public String mother;
-    @SerializedName("spouse")
-    @Expose
-    public String spouse;
-    @SerializedName("allegiances")
-    @Expose
-    public List<String> allegiances = new ArrayList<String>();
-    @SerializedName("books")
-    @Expose
-    public List<String> books = new ArrayList<String>();
-    @SerializedName("povBooks")
-    @Expose
-    public List<Object> povBooks = new ArrayList<Object>();
-    @SerializedName("tvSeries")
-    @Expose
-    public List<String> tvSeries = new ArrayList<String>();
-    @SerializedName("playedBy")
-    @Expose
-    public List<String> playedBy = new ArrayList<String>();
+        @SerializedName("url")
+        @Expose
+        private String url;
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("gender")
+        @Expose
+        private String gender;
+        @SerializedName("culture")
+        @Expose
+        private String culture;
+        @SerializedName("born")
+        @Expose
+        private String born;
+        @SerializedName("died")
+        @Expose
+        private String died;
+        @SerializedName("titles")
+        @Expose
+        private List<String> titles = new ArrayList<String>();
+        @SerializedName("aliases")
+        @Expose
+        private List<String> aliases = new ArrayList<String>();
+        @SerializedName("father")
+        @Expose
+        private String father;
+        @SerializedName("mother")
+        @Expose
+        private String mother;
+        @SerializedName("spouse")
+        @Expose
+        private String spouse;
+        @SerializedName("allegiances")
+        @Expose
+        private List<String> allegiances = new ArrayList<String>();
+        @SerializedName("books")
+        @Expose
+        private List<String> books = new ArrayList<String>();
+        @SerializedName("povBooks")
+        @Expose
+        private List<Object> povBooks = new ArrayList<Object>();
+        @SerializedName("tvSeries")
+        @Expose
+        private List<String> tvSeries = new ArrayList<String>();
+        @SerializedName("playedBy")
+        @Expose
+        private List<String> playedBy = new ArrayList<String>();
 
+        public String getUrl() {
+            return url;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getBorn() {
+            return born;
+        }
+
+        public String getDied() {
+            return died;
+        }
+
+        public List<String> getTitles() {
+            return titles;
+        }
+
+        public List<String> getAliases() {
+            return aliases;
+        }
+
+        public String getFather() {
+            return father;
+        }
+
+        public String getMother() {
+            return mother;
+        }
+
+        public List<String> getTvSeries() {
+            return tvSeries;
+        }
 }

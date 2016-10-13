@@ -16,4 +16,6 @@ public interface AppConfig {
     // Time configs
     long MAX_CONNECT_TIMEOUT = 15_000;
     long MAX_READ_TIMEOUT = 15_000;
+
+    int pageSize = 50;
 }

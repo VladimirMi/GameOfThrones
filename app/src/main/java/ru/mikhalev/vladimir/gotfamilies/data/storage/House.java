@@ -1,19 +1,19 @@
 package ru.mikhalev.vladimir.gotfamilies.data.storage;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Unique;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
+
+import ru.mikhalev.vladimir.gotfamilies.data.network.HouseModelResponse;
+import ru.mikhalev.vladimir.gotfamilies.utils.Helpers;
 
 @Entity(active = true, nameInDb = "HOUSES")
 public class House {
-    @Id
-    private Long id;
-
-    @NotNull
     @Unique
+    private int id;
+    
     private String name;
 
     private String words;
@@ -26,8 +26,14 @@ public class House {
     @Generated(hash = 1167916919)
     private transient HouseDao myDao;
 
-    @Generated(hash = 385332522)
-    public House(Long id, @NotNull String name, String words) {
+    public House(HouseModelResponse houseModelResponse) {
+        this.id = Helpers.getIdFromURL(houseModelResponse.getUrl());
+        this.name = houseModelResponse.getName();
+        this.words = houseModelResponse.getWords();
+    }
+
+    @Generated(hash = 437816150)
+    public House(int id, String name, String words) {
         this.id = id;
         this.name = name;
         this.words = words;
@@ -37,11 +43,11 @@ public class House {
     public House() {
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

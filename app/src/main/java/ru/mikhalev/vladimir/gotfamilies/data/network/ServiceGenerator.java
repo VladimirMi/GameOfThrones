@@ -26,7 +26,7 @@ public class ServiceGenerator {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        sHttpClient.addInterceptor(logging);
+//        sHttpClient.addInterceptor(logging);
         sHttpClient.connectTimeout(AppConfig.MAX_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
         sHttpClient.readTimeout(AppConfig.MAX_READ_TIMEOUT, TimeUnit.MILLISECONDS);
         sHttpClient.cache(new Cache(GotfamilyApplication.getAppContext().getCacheDir(), Integer.MAX_VALUE));
