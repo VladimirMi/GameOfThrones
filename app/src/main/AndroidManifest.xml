@@ -27,6 +27,15 @@
             android:label="@string/title_activity_families"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".ui.activities.CharacterActivity"
+            android:label="@string/title_activity_character"
+            android:parentActivityName=".ui.activities.FamiliesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.mikhalev.vladimir.gotfamilies.ui.activities.FamiliesActivity"/>
+        </activity>
     </application>
 
 </manifest>
