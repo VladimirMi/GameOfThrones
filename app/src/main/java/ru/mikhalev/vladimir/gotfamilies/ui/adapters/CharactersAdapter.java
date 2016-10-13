@@ -12,15 +12,19 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.mikhalev.vladimir.gotfamilies.R;
+import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.Character;
-import ru.mikhalev.vladimir.gotfamilies.utils.Helpers;
+import ru.mikhalev.vladimir.gotfamilies.utils.AppConfig;
+import ru.mikhalev.vladimir.gotfamilies.utils.UiHelper;
 
 public class CharactersAdapter extends BaseAdapter{
 
+    private final Integer mHouseIconRes;
     private List<Character> mCharacters;
 
-    public CharactersAdapter(List<Character> characters) {
+    public CharactersAdapter(List<Character> characters, int houseId) {
         mCharacters = characters;
+        mHouseIconRes = AppConfig.houseIconRes.get(AppConfig.houseIds.indexOf(houseId));
     }
 
     @Override
@@ -53,6 +57,7 @@ public class CharactersAdapter extends BaseAdapter{
         TextView characterNameView = (TextView) itemView.findViewById(R.id.character_name_txt);
         TextView characterDescView = (TextView) itemView.findViewById(R.id.character_desc_txt);
 
+        UiHelper.setHouseIcon(DataManager.getInstance().getContext(), mHouseIconRes, houseIcon);
 
         String description = mCharacters.get(position).getTitles();
         if (description.isEmpty()) {

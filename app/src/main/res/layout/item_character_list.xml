@@ -9,8 +9,7 @@
         android:id="@+id/house_icon_img"
         android:layout_width="@dimen/size_medium_56"
         android:layout_height="@dimen/size_medium_56"
-        android:layout_marginRight="@dimen/spacing_medium_32"
-        android:background="#c5c5"/>
+        android:layout_marginRight="@dimen/spacing_medium_32"/>
 
     <LinearLayout
         android:layout_width="match_parent"

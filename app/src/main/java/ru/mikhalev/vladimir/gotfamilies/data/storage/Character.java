@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Unique;
 
 import ru.mikhalev.vladimir.gotfamilies.data.network.CharacterModelResponse;
-import ru.mikhalev.vladimir.gotfamilies.utils.Helpers;
+import ru.mikhalev.vladimir.gotfamilies.utils.Helper;
 
 @Entity(active = true, nameInDb = "CHARACTERS")
 public class Character {
@@ -43,16 +43,16 @@ public class Character {
     private transient CharacterDao myDao;
 
     public Character(CharacterModelResponse characterModelResponse, String houseUrl) {
-        this.id = Helpers.getIdFromURL(characterModelResponse.getUrl());
-        this.houseId = Helpers.getIdFromURL(houseUrl);
+        this.id = Helper.getIdFromURL(characterModelResponse.getUrl());
+        this.houseId = Helper.getIdFromURL(houseUrl);
         this.name = characterModelResponse.getName();
         this.born = characterModelResponse.getBorn();
         this.died = characterModelResponse.getDied();
-        this.titles = Helpers.convertToDb(characterModelResponse.getTitles());
-        this.aliases = Helpers.convertToDb(characterModelResponse.getAliases());
-        this.motherId = Helpers.getIdFromURL(characterModelResponse.getMother());
-        this.fatherId = Helpers.getIdFromURL(characterModelResponse.getFather());
-        this.seasons = Helpers.convertToDb(characterModelResponse.getTvSeries());
+        this.titles = Helper.convertToDb(characterModelResponse.getTitles());
+        this.aliases = Helper.convertToDb(characterModelResponse.getAliases());
+        this.motherId = Helper.getIdFromURL(characterModelResponse.getMother());
+        this.fatherId = Helper.getIdFromURL(characterModelResponse.getFather());
+        this.seasons = Helper.convertToDb(characterModelResponse.getTvSeries());
     }
 
     @Generated(hash = 808332274)

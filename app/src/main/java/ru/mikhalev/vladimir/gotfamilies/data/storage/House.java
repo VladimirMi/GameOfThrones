@@ -3,11 +3,10 @@ package ru.mikhalev.vladimir.gotfamilies.data.storage;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Unique;
 
 import ru.mikhalev.vladimir.gotfamilies.data.network.HouseModelResponse;
-import ru.mikhalev.vladimir.gotfamilies.utils.Helpers;
+import ru.mikhalev.vladimir.gotfamilies.utils.Helper;
 
 @Entity(active = true, nameInDb = "HOUSES")
 public class House {
@@ -27,7 +26,7 @@ public class House {
     private transient HouseDao myDao;
 
     public House(HouseModelResponse houseModelResponse) {
-        this.id = Helpers.getIdFromURL(houseModelResponse.getUrl());
+        this.id = Helper.getIdFromURL(houseModelResponse.getUrl());
         this.name = houseModelResponse.getName();
         this.words = houseModelResponse.getWords();
     }

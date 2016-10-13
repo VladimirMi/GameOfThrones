@@ -5,7 +5,7 @@ import android.util.Log;
 
 import java.util.List;
 
-public class Helpers {
+public class Helper {
 
     public static int getIdFromURL(String url) {
         String id = "";

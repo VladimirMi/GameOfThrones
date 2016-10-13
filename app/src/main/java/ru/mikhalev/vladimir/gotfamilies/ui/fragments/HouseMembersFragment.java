@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.List;
+
 import ru.mikhalev.vladimir.gotfamilies.R;
 import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
+import ru.mikhalev.vladimir.gotfamilies.data.storage.Character;
 import ru.mikhalev.vladimir.gotfamilies.ui.adapters.CharactersAdapter;
+import ru.mikhalev.vladimir.gotfamilies.utils.AppConfig;
 import ru.mikhalev.vladimir.gotfamilies.utils.ConstantManager;
 
 public class HouseMembersFragment extends Fragment {
@@ -45,8 +49,12 @@ public class HouseMembersFragment extends Fragment {
 
 
         ListView listView = (ListView) rootView.findViewById(R.id.characters_list);
+
         int houseId = getArguments().getInt(ARG_HOUSE_ID);
-        listView.setAdapter(new CharactersAdapter(DataManager.getInstance().getCharactersForHouse(houseId)));
+
+        List<Character> characters = DataManager.getInstance().getCharactersForHouse(houseId);
+
+        listView.setAdapter(new CharactersAdapter(characters, houseId));
         return rootView;
     }
 }

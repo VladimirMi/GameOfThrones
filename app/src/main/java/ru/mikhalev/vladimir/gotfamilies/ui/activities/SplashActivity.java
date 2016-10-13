@@ -69,7 +69,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadCharacters() {
-        for (int page = 1; page < 44; page++) {
+        for (int page = 1; page <= AppConfig.pages; page++) {
             Call<List<CharacterModelResponse>> call = mDataManager.getCharactersFromNet(page);
 
             final int finalPage = page;
@@ -79,7 +79,7 @@ public class SplashActivity extends BaseActivity {
 
                     if (response.isSuccessful()) {
                         mCharactersResponse.addAll(response.body());
-                        if (finalPage == 43) {
+                        if (finalPage == AppConfig.pages) {
                             saveData();
                         }
                     } else {
