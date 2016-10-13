@@ -4,4 +4,11 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_character">CharacterActivity</string>
+    <string name="title_words">Words:</string>
+    <string name="title_born">Born:</string>
+    <string name="title_died">Died:</string>
+    <string name="title_titles">Titles:</string>
+    <string name="title_aliases">Aliases:</string>
+    <string name="title_father">Father:</string>
+    <string name="title_mother">Mother:</string>
 </resources>
