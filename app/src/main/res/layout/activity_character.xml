@@ -22,6 +22,7 @@
             app:contentScrim="@color/color_primary"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleMarginBottom="@dimen/spacing_larger_72"
+            app:expandedTitleTextAppearance="@style/ActionBar.MyTitle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <FrameLayout
@@ -172,7 +173,8 @@
 
                 <TextView
                     android:text="@string/title_aliases"
-                    style="@style/profile_element_title"/>
+                    style="@style/profile_element_title"
+                    android:layout_gravity="top"/>
 
                 <TextView
                     android:id="@+id/aliases_txt"

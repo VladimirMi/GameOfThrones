@@ -15,6 +15,7 @@ public interface AppConfig {
 
     List<Integer> houseIds = Arrays.asList(362, 229, 378);
     List<Integer> houseIconRes = Arrays.asList(R.drawable.stark_icon, R.drawable.lanister_icon, R.drawable.targaryen_icon);
+    List<Integer> houseImageRes = Arrays.asList(R.drawable.stark, R.drawable.lanister, R.drawable.targaryen);
 
     // Time configs
     long MAX_CONNECT_TIMEOUT = 15_000;
