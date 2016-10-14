@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -17,8 +18,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
+            android:layout_height="wrap_content"
             app:contentScrim="@color/color_primary"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleMarginBottom="@dimen/spacing_larger_72"
@@ -28,14 +28,14 @@
             <FrameLayout
                 android:id="@+id/profile_photo_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:fitsSystemWindows="true">
 
                 <ImageView
                     android:id="@+id/house_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
 
             </FrameLayout>
 

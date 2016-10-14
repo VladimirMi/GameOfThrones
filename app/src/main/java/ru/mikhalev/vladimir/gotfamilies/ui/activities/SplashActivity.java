@@ -3,6 +3,8 @@ package ru.mikhalev.vladimir.gotfamilies.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -13,12 +15,14 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.mikhalev.vladimir.gotfamilies.R;
 import ru.mikhalev.vladimir.gotfamilies.data.network.CharacterModelResponse;
 import ru.mikhalev.vladimir.gotfamilies.data.network.HouseModelResponse;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.Character;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.House;
 import ru.mikhalev.vladimir.gotfamilies.utils.AppConfig;
 import ru.mikhalev.vladimir.gotfamilies.utils.ConstantManager;
+import ru.mikhalev.vladimir.gotfamilies.utils.NetworkStatusChecker;
 
 public class SplashActivity extends BaseActivity {
     private static final String TAG = ConstantManager.TAG_PREFIX + "SplashActivity";
@@ -28,22 +32,47 @@ public class SplashActivity extends BaseActivity {
     private List<CharacterModelResponse> mCharactersResponse = new ArrayList<>();
     private List<House> mHouses = new ArrayList<>();
     private List<HouseModelResponse> mHousesResponse = new ArrayList<>();
-    private boolean isSplashScreenVisible = true;
+    private boolean isLoading;
+    private CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+
+        Log.d(TAG, "onCreate: " + mDataManager.getCharactersFromDB().size());
+
+        if (mDataManager.getCharactersFromDB().size() == 0) {
+
+            if (NetworkStatusChecker.isNetworkAvaliable(this)) {
+
+                startDelay();
+                isLoading = true;
+                loadHouses();
+                loadCharacters();
+
+            } else {
+                showSnackBar(getString(R.string.err_msg_internet));
+            }
+        } else {
+            startDelay();
+        }
+    }
+
+    private void startDelay() {
         showProgress();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                isSplashScreenVisible = false;
                 startNextActivity();
             }
         }, 3000);
-        loadHouses();
-        loadCharacters();
+    }
+
+    private void showSnackBar(String message) {
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     private void loadHouses() {
@@ -115,12 +144,13 @@ public class SplashActivity extends BaseActivity {
         mHouseDao.insertOrReplaceInTx(mHouses);
         mCharacterDao.insertOrReplaceInTx(mCharacters);
 
+        isLoading = false;
         startNextActivity();
     }
 
     private void startNextActivity() {
         hideProgress();
-        if (!isSplashScreenVisible) {
+        if (!isLoading) {
             Intent startFamiliesActivity = new Intent(this, FamiliesActivity.class);
             startActivity(startFamiliesActivity);
             finish();

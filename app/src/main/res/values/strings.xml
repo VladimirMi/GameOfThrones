@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GoTFamilies</string>
+    <string name="app_name">GoTHouses</string>
     <string name="fio">Владимир Михалев</string>
     <string name="title_words">Words:</string>
     <string name="title_born">Born:</string>
@@ -9,4 +9,6 @@
     <string name="title_father">Father:</string>
     <string name="title_mother">Mother:</string>
     <string name="stab">Stab!</string>
+    <string name="err_msg_internet">Интернет не доступен</string>
+    <string name="msg_died">Died in the %s season</string>
 </resources>

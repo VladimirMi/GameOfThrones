@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="ru.mikhalev.vladimir.gotfamilies">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
@@ -23,12 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.FamiliesActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.activities.FamiliesActivity">
         </activity>
         <activity
-            android:name=".ui.activities.CharacterActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.activities.CharacterActivity">
         </activity>
     </application>
 

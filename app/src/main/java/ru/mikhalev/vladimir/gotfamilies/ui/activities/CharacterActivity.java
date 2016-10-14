@@ -2,17 +2,16 @@ package ru.mikhalev.vladimir.gotfamilies.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +45,8 @@ public class CharacterActivity extends BaseActivity {
     List<LinearLayout> mButtonLayouts;
 
     @BindView(R.id.house_img) ImageView mHouseImageView;
-
     @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.coordinator_layout) CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,7 @@ public class CharacterActivity extends BaseActivity {
         mCharacter = mDataManager.getCharacterFromDB(characterId);
         mHouse = mDataManager.getHouseFromDB(mCharacter.getHouseId());
 
+        showDiedSnackBar();
         setupToolbar();
 
         List<String> textValues = generateTextValues(mCharacter);
@@ -132,6 +132,14 @@ public class CharacterActivity extends BaseActivity {
                     startActivity(parentCharacterIntent);
                 }
             });
+        }
+    }
+
+    private void showDiedSnackBar() {
+        if (!mCharacter.getDied().isEmpty() && !mCharacter.getSeasons().isEmpty()) {
+            String[] seasons = mCharacter.getSeasons().split(" ");
+            String message = String.format(getString(R.string.msg_died), seasons[seasons.length - 1]);
+            Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
         }
     }
 }

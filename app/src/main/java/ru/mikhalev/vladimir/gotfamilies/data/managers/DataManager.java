@@ -76,26 +76,29 @@ public class DataManager {
 
     public Character getCharacterFromDB(int id) {
         Character character = mDaoSession.queryBuilder(Character.class)
-                    .where(CharacterDao.Properties.Id.eq(id))
-                    .build()
-                    .unique();
+                .where(CharacterDao.Properties.Id.eq(id))
+                .build()
+                .unique();
         return character;
     }
 
     public List<Character> getCharactersForHouse(int houseId) {
         List<Character> characters = new ArrayList<>();
 
-        try {
-            characters = mDaoSession.queryBuilder(Character.class)
-                    .where(CharacterDao.Properties.HouseId.eq(houseId))
-                    .orderAsc(CharacterDao.Properties.Id)
-                    .build()
-                    .list();
-        } catch (Exception e) {
-
-        }
-        return characters;
+        return characters = mDaoSession.queryBuilder(Character.class)
+                .where(CharacterDao.Properties.HouseId.eq(houseId))
+                .orderAsc(CharacterDao.Properties.Id)
+                .build()
+                .list();
     }
+
+    public List<Character> getCharactersFromDB() {
+        List<Character> characters = new ArrayList<>();
+        return characters = mDaoSession.queryBuilder(Character.class)
+                .build()
+                .list();
+    }
+
 
     public House getHouseFromDB(int id) {
         House house = mDaoSession.queryBuilder(House.class)
