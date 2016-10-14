@@ -22,10 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.FamiliesActivity">
+            android:name=".ui.activities.FamiliesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.activities.CharacterActivity">
+            android:name=".ui.activities.CharacterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

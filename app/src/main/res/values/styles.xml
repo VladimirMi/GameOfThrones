@@ -28,8 +28,8 @@
     </style>
 
     <style name="ActionBar.MyTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">@dimen/font_largest_34</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-medium</item>
     </style>
 
     <style name="profile">

@@ -14,6 +14,7 @@
     <dimen name="font_small_14">14sp</dimen>
 
     <!-- Spaces -->
+    <dimen name="spacing_largest_84">84dp</dimen>
     <dimen name="spacing_larger_72">72dp</dimen>
     <dimen name="spacing_large_56">56dp</dimen>
     <dimen name="spacing_medium_48">48dp</dimen>
