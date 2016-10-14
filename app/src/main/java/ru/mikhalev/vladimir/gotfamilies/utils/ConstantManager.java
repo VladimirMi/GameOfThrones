@@ -5,8 +5,8 @@ public interface ConstantManager {
     String CHARACTER_ID = "CHARACTER_ID";
 
     int STARK_ID = 362;
-    int LANISTER_ID = 362;
-    int TARGARYEN_ID = 362;
+    int LANISTER_ID = 229;
+    int TARGARYEN_ID = 378;
     int ARRYN_ID = 7;
     int GREYJOY_ID = 169;
     int TYRELL_ID = 398;
