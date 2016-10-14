@@ -1,11 +1,7 @@
 package ru.mikhalev.vladimir.gotfamilies.utils;
 
-import android.util.Patterns;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import ru.mikhalev.vladimir.gotfamilies.R;
 
@@ -13,8 +9,11 @@ public interface AppConfig {
     // URL
     String BASE_URL = "http://www.anapioficeandfire.com/api/";
 
-    // 444 max id
-    List<Integer> houseIds = Arrays.asList(229, 362, 378);
+    // 444 max id, 3 elements
+    List<Integer> houseIds = Arrays.asList(
+            ConstantManager.STARK_ID,
+            ConstantManager.LANISTER_ID,
+            ConstantManager.TARGARYEN_ID);
 
     List<Integer> houseIconRes = Arrays.asList(
             R.drawable.stark_icon,
