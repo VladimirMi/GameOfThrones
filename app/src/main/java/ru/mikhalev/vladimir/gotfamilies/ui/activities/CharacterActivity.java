@@ -7,6 +7,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -79,7 +80,9 @@ public class CharacterActivity extends BaseActivity {
             setupButton(mButtons.get(i), mButtonLayouts.get(i), buttonValues.get(i));
         }
 
-        int imageRes = AppConfig.houseImageRes.get(AppConfig.houseIds.indexOf(mHouse.getId()));
+        int houseIndex = AppConfig.houseIds.indexOf(mHouse.getId());
+        houseIndex = houseIndex != -1 ? houseIndex : AppConfig.houseIds.size();
+        int imageRes = AppConfig.houseImageRes.get(houseIndex);
         CustomGlideModule.setImage(this, imageRes, mHouseImageView);
     }
 
@@ -135,7 +138,7 @@ public class CharacterActivity extends BaseActivity {
     }
 
     private void setupButton(Button button, LinearLayout linearLayout, final Integer id) {
-        if (id == 0) {
+        if (id == 1) {
             linearLayout.setVisibility(View.GONE);
         } else {
             final Character parent = mDataManager.getCharacterFromDB(id);

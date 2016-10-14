@@ -12,9 +12,9 @@ public class Helper {
         if (url != null) {
             id = url.substring(url.lastIndexOf("/") + 1);
         } else {
-            return 0;
+            return 1;
         }
-        return id.isEmpty() ? 0 : Integer.valueOf(id);
+        return id.isEmpty() ? 1 : Integer.valueOf(id);
     }
 
     public static String getShortHouseName(String houseName) {

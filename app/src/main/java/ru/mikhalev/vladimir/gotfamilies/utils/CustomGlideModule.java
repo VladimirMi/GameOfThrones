@@ -2,9 +2,6 @@ package ru.mikhalev.vladimir.gotfamilies.utils;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -14,9 +11,7 @@ import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.module.GlideModule;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
-import ru.mikhalev.vladimir.gotfamilies.R;
 import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
 
 public class CustomGlideModule implements GlideModule {
@@ -39,46 +34,11 @@ public class CustomGlideModule implements GlideModule {
         // register ModelLoaders here.
     }
 
-//    public static void setUserPhoto(final Context context, final String path, final ImageView view) {
-//        String loadPath = path.isEmpty() ? "null" : path;
-//
-//        Glide.with(context)
-//                .load(loadPath)
-//                .error(context.getResources().getDrawable(R.drawable.user_bg))
-//                .placeholder(context.getResources().getDrawable(R.drawable.user_bg))
-//                .centerCrop()
-////                .fitCenter()
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-//                .into(view);
-//    }
-//
-//    public static void setUserAvatar(final Context context, final String path, final ImageView view) {
-//        String loadPath = path.isEmpty() ? "null" : path;
-//
-//        Glide.with(context)
-//                .load(loadPath)
-//                .asBitmap()
-//                .centerCrop()
-//                .error(context.getResources().getDrawable(R.drawable.user_bg))
-//                .placeholder(context.getResources().getDrawable(R.drawable.user_bg))
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-//                .into(new BitmapImageViewTarget(view) {
-//                    @Override
-//                    protected void setResource(Bitmap resource) {
-//                        RoundedBitmapDrawable circularBitmapDrawable =
-//                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-//                        circularBitmapDrawable.setCircular(true);
-//                        view.setImageDrawable(circularBitmapDrawable);
-//                    }
-//                });
-//    }
-
     public static void setImage(Context context, int imageRes, ImageView view) {
         Glide.with(context)
                 .load(imageRes)
                 .centerCrop()
+                .fitCenter()
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(view);

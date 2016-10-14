@@ -29,9 +29,9 @@ public class SplashActivity extends BaseActivity {
 
     Map<String, String> mCharacterHouseMap = new HashMap<>();
     private List<Character> mCharacters = new ArrayList<>();
-    private List<CharacterModelResponse> mCharactersResponse = new ArrayList<>();
+    private List<CharacterModelResponse> mCharactersResponses = new ArrayList<>();
     private List<House> mHouses = new ArrayList<>();
-    private List<HouseModelResponse> mHousesResponse = new ArrayList<>();
+    private List<HouseModelResponse> mHousesResponses = new ArrayList<>();
     private boolean isLoading;
     private CoordinatorLayout mCoordinatorLayout;
 
@@ -41,9 +41,6 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
-        Log.d(TAG, "onCreate: " + mDataManager.getCharactersFromDB().size());
-
-//        if (true) {
         if (mDataManager.getCharactersFromDB().size() == 0) {
 
             if (NetworkStatusChecker.isNetworkAvaliable(this)) {
@@ -77,21 +74,22 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadHouses() {
-        for (Integer houseId : AppConfig.houseIds) {
-            Call<HouseModelResponse> call = mDataManager.getHouseFromNet(houseId);
+        for (int page = 1; page <= AppConfig.housePages; page++) {
 
-            call.enqueue(new Callback<HouseModelResponse>() {
+            Call<List<HouseModelResponse>> call = mDataManager.getHousesFromNet(page);
+
+            call.enqueue(new Callback<List<HouseModelResponse>>() {
                 @Override
-                public void onResponse(Call<HouseModelResponse> call, Response<HouseModelResponse> response) {
+                public void onResponse(Call<List<HouseModelResponse>> call, Response<List<HouseModelResponse>> response) {
                     if (response.isSuccessful()) {
-                        mHousesResponse.add(response.body());
+                        mHousesResponses.addAll(response.body());
                     } else {
                         Log.e(TAG, "loadHouse onResponse: " + response.message());
                     }
                 }
 
                 @Override
-                public void onFailure(Call<HouseModelResponse> call, Throwable t) {
+                public void onFailure(Call<List<HouseModelResponse>> call, Throwable t) {
                     Log.e(TAG, "loadHouse onFailure: " + t.getMessage());
                 }
             });
@@ -99,7 +97,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadCharacters() {
-        for (int page = 1; page <= AppConfig.pages; page++) {
+        for (int page = 1; page <= AppConfig.characterPages; page++) {
             Call<List<CharacterModelResponse>> call = mDataManager.getCharactersFromNet(page);
 
             final int finalPage = page;
@@ -108,8 +106,8 @@ public class SplashActivity extends BaseActivity {
                 public void onResponse(Call<List<CharacterModelResponse>> call, Response<List<CharacterModelResponse>> response) {
 
                     if (response.isSuccessful()) {
-                        mCharactersResponse.addAll(response.body());
-                        if (finalPage == AppConfig.pages) {
+                        mCharactersResponses.addAll(response.body());
+                        if (finalPage == AppConfig.characterPages) {
                             saveData();
                         }
                     } else {
@@ -128,14 +126,14 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void saveData() {
-        for (HouseModelResponse houseModelResponse : mHousesResponse) {
+        for (HouseModelResponse houseModelResponse : mHousesResponses) {
             for (String characterUrl : houseModelResponse.getSwornMembers()) {
                 mCharacterHouseMap.put(characterUrl, houseModelResponse.getUrl());
             }
             House house = new House(houseModelResponse);
             mHouses.add(house);
         }
-        for (CharacterModelResponse characterModelResponse : mCharactersResponse) {
+        for (CharacterModelResponse characterModelResponse : mCharactersResponses) {
             String houseUrl = mCharacterHouseMap.get(characterModelResponse.getUrl());
             Character character = new Character(characterModelResponse, houseUrl);
             mCharacters.add(character);
