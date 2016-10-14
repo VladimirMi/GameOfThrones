@@ -11,6 +11,8 @@ public class Helper {
         String id = "";
         if (url != null) {
             id = url.substring(url.lastIndexOf("/") + 1);
+        } else {
+            return 0;
         }
         return id.isEmpty() ? 0 : Integer.valueOf(id);
     }

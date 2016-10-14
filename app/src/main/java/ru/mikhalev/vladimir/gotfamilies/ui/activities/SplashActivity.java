@@ -43,6 +43,7 @@ public class SplashActivity extends BaseActivity {
 
         Log.d(TAG, "onCreate: " + mDataManager.getCharactersFromDB().size());
 
+//        if (true) {
         if (mDataManager.getCharactersFromDB().size() == 0) {
 
             if (NetworkStatusChecker.isNetworkAvaliable(this)) {
@@ -136,10 +137,9 @@ public class SplashActivity extends BaseActivity {
         }
         for (CharacterModelResponse characterModelResponse : mCharactersResponse) {
             String houseUrl = mCharacterHouseMap.get(characterModelResponse.getUrl());
-            if (houseUrl != null) {
-                Character character = new Character(characterModelResponse, houseUrl);
-                mCharacters.add(character);
-            }
+            Character character = new Character(characterModelResponse, houseUrl);
+            mCharacters.add(character);
+
         }
         mHouseDao.insertOrReplaceInTx(mHouses);
         mCharacterDao.insertOrReplaceInTx(mCharacters);

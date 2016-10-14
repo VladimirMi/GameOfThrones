@@ -14,8 +14,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.Button.Accent" parent="Base.Widget.AppCompat.Button.Colored">
-        <item name="android:colorButtonNormal">@color/color_accent</item>
+    <style name="AppTheme.Button.Primary" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/color_primary</item>
         <item name="android:textColor">@android:color/white</item>
 
     </style>

@@ -4,6 +4,7 @@ package ru.mikhalev.vladimir.gotfamilies.ui.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.House;

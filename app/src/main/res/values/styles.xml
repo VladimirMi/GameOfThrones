@@ -22,8 +22,8 @@
     </style>
 
 
-    <style name="AppTheme.Button.Accent" parent="Base.Widget.AppCompat.Button.Colored">
-        <item name="android:color">@color/color_accent</item>
+    <style name="AppTheme.Button.Primary" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:color">@color/color_primary</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 

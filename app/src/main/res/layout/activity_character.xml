@@ -198,6 +198,7 @@
 
                 <TextView
                     style="@style/profile_element_title"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/title_father"/>
 
                 <LinearLayout
@@ -207,7 +208,7 @@
 
                     <Button
                         android:id="@+id/father_btn"
-                        style="@style/AppTheme.Button.Accent"
+                        style="@style/AppTheme.Button.Primary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"
@@ -226,6 +227,7 @@
 
                 <TextView
                     style="@style/profile_element_title"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/title_mother"/>
 
                 <LinearLayout
@@ -235,7 +237,7 @@
 
                     <Button
                         android:id="@+id/mother_btn"
-                        style="@style/AppTheme.Button.Accent"
+                        style="@style/AppTheme.Button.Primary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"

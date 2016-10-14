@@ -2,6 +2,7 @@ package ru.mikhalev.vladimir.gotfamilies.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -24,7 +25,7 @@ import ru.mikhalev.vladimir.gotfamilies.data.storage.Character;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.House;
 import ru.mikhalev.vladimir.gotfamilies.utils.AppConfig;
 import ru.mikhalev.vladimir.gotfamilies.utils.ConstantManager;
-import ru.mikhalev.vladimir.gotfamilies.utils.UiHelper;
+import ru.mikhalev.vladimir.gotfamilies.utils.CustomGlideModule;
 
 public class CharacterActivity extends BaseActivity {
 
@@ -54,7 +55,13 @@ public class CharacterActivity extends BaseActivity {
         setContentView(R.layout.activity_character);
         ButterKnife.bind(this);
 
-        int characterId = getIntent().getIntExtra(ConstantManager.CHARACTER_ID, 0);
+        int characterId;
+        if (savedInstanceState == null) {
+            characterId = getIntent().getIntExtra(ConstantManager.CHARACTER_ID, 0);
+        } else {
+            characterId = savedInstanceState.getInt(ConstantManager.CHARACTER_ID, 0);
+        }
+
         mCharacter = mDataManager.getCharacterFromDB(characterId);
         mHouse = mDataManager.getHouseFromDB(mCharacter.getHouseId());
 
@@ -73,13 +80,21 @@ public class CharacterActivity extends BaseActivity {
         }
 
         int imageRes = AppConfig.houseImageRes.get(AppConfig.houseIds.indexOf(mHouse.getId()));
-        UiHelper.setHouseImage(this, imageRes, mHouseImageView);
+        CustomGlideModule.setImage(this, imageRes, mHouseImageView);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(ConstantManager.CHARACTER_ID, mCharacter.getId());
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -89,8 +104,8 @@ public class CharacterActivity extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(mCharacter.getName());
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -123,13 +138,13 @@ public class CharacterActivity extends BaseActivity {
         if (id == 0) {
             linearLayout.setVisibility(View.GONE);
         } else {
-            button.setText(mDataManager.getCharacterFromDB(id).getName());
+            final Character parent = mDataManager.getCharacterFromDB(id);
+            button.setText(parent.getName());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent parentCharacterIntent = new Intent(CharacterActivity.this, CharacterActivity.class);
-                    parentCharacterIntent.putExtra(ConstantManager.CHARACTER_ID, id);
-                    startActivity(parentCharacterIntent);
+                    mCharacter = parent;
+                    recreate();
                 }
             });
         }

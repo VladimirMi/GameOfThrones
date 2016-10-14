@@ -15,7 +15,7 @@ import ru.mikhalev.vladimir.gotfamilies.R;
 import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.Character;
 import ru.mikhalev.vladimir.gotfamilies.utils.AppConfig;
-import ru.mikhalev.vladimir.gotfamilies.utils.UiHelper;
+import ru.mikhalev.vladimir.gotfamilies.utils.CustomGlideModule;
 
 public class CharactersAdapter extends BaseAdapter{
 
@@ -57,7 +57,7 @@ public class CharactersAdapter extends BaseAdapter{
         TextView characterNameView = (TextView) itemView.findViewById(R.id.character_name_txt);
         TextView characterDescView = (TextView) itemView.findViewById(R.id.character_desc_txt);
 
-        UiHelper.setHouseIcon(DataManager.getInstance().getContext(), mHouseIconRes, houseIcon);
+        CustomGlideModule.setImage(DataManager.getInstance().getContext(), mHouseIconRes, houseIcon);
 
         String description = mCharacters.get(position).getTitles();
         if (description.isEmpty()) {

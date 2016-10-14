@@ -10,18 +10,23 @@ import ru.mikhalev.vladimir.gotfamilies.utils.Helper;
 
 @Entity(active = true, nameInDb = "HOUSES")
 public class House {
+
     @Unique
     private int id;
-    
+
     private String name;
 
     private String words;
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1167916919)
     private transient HouseDao myDao;
 
@@ -108,4 +113,7 @@ public class House {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getHouseDao() : null;
     }
+
+
+
 }

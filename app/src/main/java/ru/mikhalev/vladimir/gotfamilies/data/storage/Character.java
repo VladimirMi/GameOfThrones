@@ -82,8 +82,16 @@ public class Character {
         this.id = id;
     }
 
+    public int getHouseId() {
+        return this.houseId;
+    }
+
+    public void setHouseId(int houseId) {
+        this.houseId = houseId;
+    }
+
     public String getName() {
-        return this.name.isEmpty() ? "" : this.name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -182,18 +190,11 @@ public class Character {
         myDao.update(this);
     }
 
-    public int getHouseId() {
-        return this.houseId;
-    }
-
-    public void setHouseId(int houseId) {
-        this.houseId = houseId;
-    }
-
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 162219484)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCharacterDao() : null;
     }
+    
 }
