@@ -24,7 +24,7 @@ public class CharactersAdapter extends BaseAdapter{
 
     public CharactersAdapter(List<Character> characters, int houseId) {
         mCharacters = characters;
-        mHouseIconRes = AppConfig.houseIconRes.get(AppConfig.houseIds.indexOf(houseId));
+        mHouseIconRes = AppConfig.HOUSE_ICON_RES.get(AppConfig.HOUSE_IDS.indexOf(houseId));
     }
 
     @Override

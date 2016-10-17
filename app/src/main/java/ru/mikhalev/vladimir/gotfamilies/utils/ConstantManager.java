@@ -12,4 +12,7 @@ public interface ConstantManager {
     int TYRELL_ID = 398;
     int TULLY_ID = 395;
     int BARATHEON_ID = 17;
+
+    int NULL_ID = 0;
+    String EMPTY_STRING = "";
 }

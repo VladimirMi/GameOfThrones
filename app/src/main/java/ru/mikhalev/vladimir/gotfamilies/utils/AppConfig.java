@@ -10,27 +10,29 @@ public interface AppConfig {
     String BASE_URL = "http://www.anapioficeandfire.com/api/";
 
     // 444 max id, 3 elements
-    List<Integer> houseIds = Arrays.asList(
+    List<Integer> HOUSE_IDS = Arrays.asList(
             ConstantManager.STARK_ID,
             ConstantManager.LANISTER_ID,
             ConstantManager.TARGARYEN_ID);
 
-    List<Integer> houseIconRes = Arrays.asList(
+    List<Integer> HOUSE_ICON_RES = Arrays.asList(
             R.drawable.stark_icon,
             R.drawable.lanister_icon,
             R.drawable.targaryen_icon);
 
-    List<Integer> houseImageRes = Arrays.asList(
+    List<Integer> HOUSE_IMAGE_RES = Arrays.asList(
             R.drawable.stark,
             R.drawable.lanister,
-            R.drawable.targaryen,
-            R.drawable.got_logo);
+            R.drawable.targaryen);
+
+    int DEFAULT_IMAGE = R.drawable.got_logo;
 
     // Time configs
     long MAX_CONNECT_TIMEOUT = 15_000;
     long MAX_READ_TIMEOUT = 15_000;
 
-    int housePages = 9;
-    int characterPages = 43;
-    int pageSize = 50;
+
+    int HOUSE_PAGES = 9;
+    int CHARACTER_PAGES = 43;
+    int PAGE_SIZE = 50;
 }

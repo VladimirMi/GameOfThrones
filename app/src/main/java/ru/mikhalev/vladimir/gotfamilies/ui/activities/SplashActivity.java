@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
-        if (mDataManager.getCharactersFromDB().size() == 0) {
+        if (mDataManager.getCharactersFromDB().isEmpty()) {
 
             if (NetworkStatusChecker.isNetworkAvaliable(this)) {
 
@@ -74,7 +74,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadHouses() {
-        for (int page = 1; page <= AppConfig.housePages; page++) {
+        for (int page = 1; page <= AppConfig.HOUSE_PAGES; page++) {
 
             Call<List<HouseModelResponse>> call = mDataManager.getHousesFromNet(page);
 
@@ -97,7 +97,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadCharacters() {
-        for (int page = 1; page <= AppConfig.characterPages; page++) {
+        for (int page = 1; page <= AppConfig.CHARACTER_PAGES; page++) {
             Call<List<CharacterModelResponse>> call = mDataManager.getCharactersFromNet(page);
 
             final int finalPage = page;
@@ -107,7 +107,7 @@ public class SplashActivity extends BaseActivity {
 
                     if (response.isSuccessful()) {
                         mCharactersResponses.addAll(response.body());
-                        if (finalPage == AppConfig.characterPages) {
+                        if (finalPage == AppConfig.CHARACTER_PAGES) {
                             saveData();
                         }
                     } else {
@@ -147,8 +147,8 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void startNextActivity() {
-        hideProgress();
         if (!isLoading) {
+            hideProgress();
             Intent startFamiliesActivity = new Intent(this, FamiliesActivity.class);
             startActivity(startFamiliesActivity);
             finish();

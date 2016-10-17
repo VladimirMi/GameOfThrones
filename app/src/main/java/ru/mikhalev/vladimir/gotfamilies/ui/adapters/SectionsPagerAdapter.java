@@ -4,7 +4,6 @@ package ru.mikhalev.vladimir.gotfamilies.ui.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import ru.mikhalev.vladimir.gotfamilies.data.managers.DataManager;
 import ru.mikhalev.vladimir.gotfamilies.data.storage.House;
@@ -23,7 +22,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return HouseMembersFragment.newInstance(AppConfig.houseIds.get(position));
+        return HouseMembersFragment.newInstance(AppConfig.HOUSE_IDS.get(position));
     }
 
     @Override
@@ -35,7 +34,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        House house = DataManager.getInstance().getHouseFromDB(AppConfig.houseIds.get(position));
+        House house = DataManager.getInstance().getHouseFromDB(AppConfig.HOUSE_IDS.get(position));
         return Helper.getShortHouseName(house.getName()).toUpperCase();
     }
 }

@@ -55,14 +55,14 @@ public class DataManager {
     public Call<List<HouseModelResponse>> getHousesFromNet(int page) {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(page));
-        options.put("pageSize", String.valueOf(AppConfig.pageSize));
+        options.put("pageSize", String.valueOf(AppConfig.PAGE_SIZE));
         return mRestService.getHouses(options);
     }
 
     public Call<List<CharacterModelResponse>> getCharactersFromNet(int page) {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(page));
-        options.put("pageSize", String.valueOf(AppConfig.pageSize));
+        options.put("pageSize", String.valueOf(AppConfig.PAGE_SIZE));
         return mRestService.getCharacters(options);
     }
 

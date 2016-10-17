@@ -2,12 +2,10 @@ package ru.mikhalev.vladimir.gotfamilies.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -56,12 +54,7 @@ public class CharacterActivity extends BaseActivity {
         setContentView(R.layout.activity_character);
         ButterKnife.bind(this);
 
-        int characterId;
-        if (savedInstanceState == null) {
-            characterId = getIntent().getIntExtra(ConstantManager.CHARACTER_ID, 0);
-        } else {
-            characterId = savedInstanceState.getInt(ConstantManager.CHARACTER_ID, 0);
-        }
+        int characterId = getIntent().getIntExtra(ConstantManager.CHARACTER_ID, 0);
 
         mCharacter = mDataManager.getCharacterFromDB(characterId);
         mHouse = mDataManager.getHouseFromDB(mCharacter.getHouseId());
@@ -80,24 +73,22 @@ public class CharacterActivity extends BaseActivity {
             setupButton(mButtons.get(i), mButtonLayouts.get(i), buttonValues.get(i));
         }
 
-        int houseIndex = AppConfig.houseIds.indexOf(mHouse.getId());
-        houseIndex = houseIndex != -1 ? houseIndex : AppConfig.houseIds.size();
-        int imageRes = AppConfig.houseImageRes.get(houseIndex);
+        int houseIndex = -1;
+        if (mHouse != null) {
+            houseIndex = AppConfig.HOUSE_IDS.indexOf(mHouse.getId());
+        }
+        int imageRes = houseIndex == -1 ?
+                AppConfig.DEFAULT_IMAGE :
+                AppConfig.HOUSE_IMAGE_RES.get(houseIndex);
         CustomGlideModule.setImage(this, imageRes, mHouseImageView);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(ConstantManager.CHARACTER_ID, mCharacter.getId());
-
-        super.onSaveInstanceState(outState);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            finish();
+            Intent intent = new Intent(this, FamiliesActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -114,7 +105,11 @@ public class CharacterActivity extends BaseActivity {
 
     private List<String> generateTextValues(Character character) {
         List<String> result = new ArrayList<>();
-        result.add(mHouse.getWords());
+        if (mHouse != null) {
+            result.add(mHouse.getWords());
+        } else {
+            result.add(ConstantManager.EMPTY_STRING);
+        }
         result.add(mCharacter.getBorn());
         result.add(mCharacter.getDied());
         result.add(mCharacter.getTitles());
@@ -138,7 +133,7 @@ public class CharacterActivity extends BaseActivity {
     }
 
     private void setupButton(Button button, LinearLayout linearLayout, final Integer id) {
-        if (id == 1) {
+        if (id == ConstantManager.NULL_ID) {
             linearLayout.setVisibility(View.GONE);
         } else {
             final Character parent = mDataManager.getCharacterFromDB(id);
@@ -146,8 +141,9 @@ public class CharacterActivity extends BaseActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCharacter = parent;
-                    recreate();
+                    Intent intent = getIntent();
+                    intent.putExtra(ConstantManager.CHARACTER_ID, parent.getId());
+                    startActivity(intent);
                 }
             });
         }

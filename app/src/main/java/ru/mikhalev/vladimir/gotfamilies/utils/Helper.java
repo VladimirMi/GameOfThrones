@@ -1,8 +1,6 @@
 package ru.mikhalev.vladimir.gotfamilies.utils;
 
 
-import android.util.Log;
-
 import java.util.List;
 
 public class Helper {
@@ -12,9 +10,9 @@ public class Helper {
         if (url != null) {
             id = url.substring(url.lastIndexOf("/") + 1);
         } else {
-            return 1;
+            return ConstantManager.NULL_ID;
         }
-        return id.isEmpty() ? 1 : Integer.valueOf(id);
+        return id.isEmpty() ? ConstantManager.NULL_ID : Integer.valueOf(id);
     }
 
     public static String getShortHouseName(String houseName) {
